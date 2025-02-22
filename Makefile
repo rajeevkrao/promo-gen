@@ -1,11 +1,10 @@
+.PHONY: run build test
+
 start:
-	go run main.go
+	go run .
 
 build:
 	go build -o build/PromoGen.exe
 
 test:
 	go test ./...
-
-clean:
-	del myapp.exe
