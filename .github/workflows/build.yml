@@ -1,0 +1,29 @@
+name: Build Windows Executable
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Still using Ubuntu but cross-compiling for Windows
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.23  # Change to your Go version
+
+      - name: Build for Windows
+        run: |
+          GOOS=windows GOARCH=amd64 go build -o build/PromoGen.exe
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PromoGen
+          path: build/PromoGen.exe
